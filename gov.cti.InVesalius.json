@@ -1,0 +1,131 @@
+{
+    "app-id": "gov.cti.InVesalius",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "1.6",
+    "sdk": "org.freedesktop.Sdk",
+    "sdk-extensions": ["org.freedesktop.Sdk.Extension.gfortran-62"],
+    "command": "runner.sh",
+    "modules": [{
+        "name": "vtk",
+        "sources": [
+            {
+                "type": "archive",
+                "url": "https://www.vtk.org/files/release/7.1/VTK-7.1.1.tar.gz",
+                "sha256": "2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a"
+            }
+        ],
+        "buildsystem": "cmake",
+        "config-opts": [
+            "-DBUILD_DOCUMENTATION=OFF",
+            "-DBUILD_EXAMPLES=OFF",
+            "-DBUILD_SHARED_LIBS=ON",
+            "-DVTK_USE_TK=OFF",
+            "-DVTK_WRAP_JAVA=OFF",
+            "-DVTK_WRAP_PYTHON=ON",
+            "-DVTK_WRAP_TCL=OFF",
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DPYTHON_EXECUTABLE=/usr/bin/python3"
+        ]
+    },
+    {
+        "name": "swig",
+        "sources":[{
+            "type": "archive",
+            "url": "http://prdownloads.sourceforge.net/swig/swig-3.0.12.tar.gz",
+            "sha256": "7cf9f447ae7ed1c51722efc45e7f14418d15d7a1e143ac9f09a668999f4fc94d"
+        }],
+        "config-opts": [
+            "--without-pcre",
+            "--disable-ccache",
+            "--without-tcl",
+            "--without-tcl",
+            "--without-perl5",
+            "--without-octave",
+            "--without-scilab",
+            "--without-java",
+            "--without-ruby"
+        ]
+    },
+    {
+        "name": "gdcm",
+        "builddir": true,
+        "sources": [{
+            "type": "archive",
+            "url": "https://netix.dl.sourceforge.net/project/gdcm/gdcm%202.x/GDCM%202.8.8/gdcm-2.8.8.tar.gz",
+            "sha256": "073405d0f3532b8b5d813b6d3d48318b297d6141d2a2d18280f1b86051ac745e"
+        }],
+        "buildsystem": "cmake",
+        "config-opts": [
+            "-DGDCM_BUILD_APPLICATIONS=OFF",
+            "-DGDCM_BUILD_SHARED_LIBS=ON",
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DGDCM_WRAP_PYTHON=ON",
+            "-DPYTHON_EXECUTABLE=/usr/bin/python3",
+            "-DGDCM_INSTALL_PYTHONMODULE_DIR=/app/lib/python3.5/site-packages/",
+            "-DGDCM_USE_VTK=ON",
+            "-DGDCM_BUILD_DOCBOOK_MANPAGES:BOOL=OFF"
+        ]
+    },
+
+    {
+        "name": "gfortran",
+        "buildsystem": "simple",
+        "build-commands": [ "/usr/lib/sdk/gfortran-62/install.sh" ]
+    },
+    {
+        "name": "lapack",
+        "buildsystem": "cmake",
+        "builddir": true,
+        "config-opts": [
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DBUILD_SHARED_LIBS=ON",
+            "-DBUILD_TESTING=OFF",
+            "-DCMAKE_Fortran_COMPILER=/usr/lib/sdk/gfortran-62/bin/gfortran",
+            "-DLAPACKE=ON",
+            "-DCBLAS=ON"
+        ],
+        "sources": [
+            {
+                "type": "archive",
+                "url": "http://www.netlib.org/lapack/lapack-3.8.0.tar.gz",
+                "sha512": "17786cb7306fccdc9b4a242de7f64fc261ebe6a10b6ec55f519deb4cb673cb137e8742aa5698fd2dc52f1cd56d3bd116af3f593a01dcf6770c4dcc86c50b2a7f"
+            }
+        ],
+        "cleanup": [ "/lib/cmake" ]
+    },
+
+    "python3-numpy.json",
+    "python3-scipy.json",
+    "python3-cython.json",
+    "python3-Pillow.json",
+    "python3-setuptools.json",
+    "python3-setuptools_scm.json",
+    "python3-python-dateutil.json",
+    "python3-matplotlib.json",
+    "python3-scikit-image.json",
+    "python3-bz2file.json",
+    "python3-nibabel.json",
+    "python3-pyserial.json",
+    "python3-psutil.json",
+    "python3-configparser.json",
+    "python3-wxpython.json",
+    {
+        "name": "runner",
+        "buildsystem": "simple",
+        "build-commands": [
+            "install -D runner.sh /app/bin/runner.sh",
+            "install -D hello.py /app/bin/hello.py"
+        ],
+        "sources": [
+            {
+                "type": "file",
+                "path": "hello.py"
+            },
+            {
+                "type": "file",
+                "path": "runner.sh"
+            }
+        ]
+    }
+    ]
+}
