@@ -110,36 +110,6 @@
     "python3-configparser.json",
     "shared-modules/glu/glu-9.0.0.json",
     {
-        "name": "wxWidgets",
-        "rm-configure": true,
-        "config-opts": [
-            "--with-gtk=3",
-            "--disable-sdltest",
-            "--disable-webkit",
-            "--disable-webview",
-            "--disable-webviewwebkit",
-            "--with-opengl"
-        ],
-        "cxxflags": [
-            "-std=c++11"
-        ],
-        "sources": [
-            {
-                "type": "archive",
-                "url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.2/wxWidgets-3.1.2.tar.bz2",
-                "sha256": "4cb8d23d70f9261debf7d6cfeca667fc0a7d2b6565adb8f1c484f9b674f1f27a"
-            },
-            {
-                "type": "script",
-                "path": "autogen.sh",
-                "commands": [
-                    "cp -p /usr/share/automake-*/config.{sub,guess} .",
-                    "autoconf -f -B build/autoconf_prepend-include"
-                ]
-            }
-        ]
-    },
-    {
         "name" : "sip",
         "sources" : [
             {
@@ -161,71 +131,30 @@
         ]
     },
     {
-        "name": "wxWidgets",
-        "cleanup": [
-            "/bin",
-            "/include",
-            "/share/bakefile",
-            "/share/aclocal",
-            "/lib/wx/include"
-          ],
-          "config-opts": [
-              "--with-opengl",
-              "--with-libjpeg",
-              "--with-libpng",
-              "--with-zlib",
-              "--disable-sdltest",
-              "--enable-unicode",
-              "--enable-display",
-              "--enable-propgrid",
-              "--disable-webkit",
-              "--disable-webview",
-              "--disable-webviewwebkit",
-              "--with-expat=builtin",
-              "--with-libiconv=/usr"
-          ],
-          "build-options" : {
-              "cxxflags":"-std=c++11"
-          },
-          "sources": [
-              {
-                  "type": "archive",
-                  "url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.4/wxWidgets-3.0.4.tar.bz2",
-                  "sha256":"96157f988d261b7368e5340afa1a0cad943768f35929c22841f62c25b17bf7f0"
-              }
-          ],
-          "modules": [
-              "shared-modules/glu/glu-9.0.0.json"
-          ]
-    },
-    {
-        "name": "wxpython",
-        "buildsystem": "simple",
-        "build-commands": [
-            "cd ext/wxWidgets && cp -p /usr/share/automake-*/config.{sub,guess} . &&  autoconf -f -B build/autoconf_prepend-include && ./configure --disable-sdltest --disable-webkit --disable-webview --disable-webviewwebkit --disable-ribbon --disable-propgrid --disable-xru --disable-richtext --with-gtk=3 && make",
-            "python3 build.py sip --nodoc build_py --build_dir=ext/wxWidgets",
-            "python3 build.py install_py"
+        "name": "webkitgtk",
+        "buildsystem": "cmake",
+        "config-opts": [
+            "-DPORT=GTK",
+            "-DPYTHON_EXECUTABLE=/usr/bin/python3",
+            "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
+            "-DENABLE_BUBBLEWRAP_SANDBOX=OFF",
+            "-DUSE_LIBSECRET=OFF",
+            "-DENABLE_SPELLCHECK=OFF",
+            "-DUSE_LIBNOTIFY=OFF",
+            "-DUSE_OPENJPEG=OFF",
+            "-DUSE_WOFF2=OFF",
+            "-DENABLE_MEDIA_SOURCE=OFF"
         ],
-
-        "build-options": {
-            "env": {
-                "WAF": "${PWD}/waf-2.0.14",
-                "SIP": "${FLATPAK_DEST}/bin/sip"
-            }
-        },
+        "cleanup": [ "/share/doc", "/bin" ],
         "sources": [
             {
                 "type": "archive",
-                "url": "https://files.pythonhosted.org/packages/17/74/7c3ced03c3c76b9f98e4a0edae1801755a7599ebf481c04d9f77dfff17e3/wxPython-4.0.4.tar.gz",
-                "sha256": "0d9ef4260cb2f3e23ed9dcf6baa905ba585ac7d631613cddc299c4c83463ae29"
-            },
-            {
-                "type": "file",
-                "url": "https://waf.io/waf-2.0.14",
-                "sha256": "c5bc6083bba5e24415bb83872fa9e048afa150109a7e8855af679076d0779b22"
+                "url": "https://webkitgtk.org/releases/webkitgtk-2.23.90.tar.xz",
+                "sha256": "841bd9ac7b3b5765d6d618b9e87bc75efa6fe4b987b85abaa1da28a31d8c06c8"
             }
         ]
     },
+    "python3-wxpython.json",
     {
         "name": "runner",
         "buildsystem": "simple",
