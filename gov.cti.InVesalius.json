@@ -108,7 +108,86 @@
     "python3-pyserial.json",
     "python3-psutil.json",
     "python3-configparser.json",
-    "python3-wxpython.json",
+    "shared-modules/glu/glu-9.0.0.json",
+    {
+        "name": "wxWidgets",
+        "rm-configure": true,
+        "config-opts": [
+            "--with-gtk=3",
+            "--disable-sdltest",
+            "--disable-webkit",
+            "--disable-webview",
+            "--disable-webviewwebkit",
+            "--with-opengl"
+        ],
+        "cxxflags": [
+            "-std=c++11"
+        ],
+        "sources": [
+            {
+                "type": "archive",
+                "url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.2/wxWidgets-3.1.2.tar.bz2",
+                "sha256": "4cb8d23d70f9261debf7d6cfeca667fc0a7d2b6565adb8f1c484f9b674f1f27a"
+            },
+            {
+                "type": "script",
+                "path": "autogen.sh",
+                "commands": [
+                    "cp -p /usr/share/automake-*/config.{sub,guess} .",
+                    "autoconf -f -B build/autoconf_prepend-include"
+                ]
+            }
+        ]
+    },
+    {
+        "name" : "sip",
+        "sources" : [
+            {
+                "type" : "archive",
+                "url" : "https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.12/sip-4.19.12.tar.gz",
+                "sha256" : "24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822"
+            },
+            {
+                "type": "script",
+                "commands": [
+                    "python3 configure.py -b ${FLATPAK_DEST}/bin -d ${FLATPAK_DEST}/lib/python3.5/site-packages -e ${FLATPAK_DEST}/include -v ${FLATPAK_DEST}/share/sip --stubsdir=${FLATPAK_DEST}/lib/python3.5/site-packages"
+                ],
+                "dest-filename": "configure"
+            }
+        ],
+        "cleanup" : [
+            "/bin",
+            "/include"
+        ]
+    },
+    {
+        "name": "wxpython",
+        "buildsystem": "simple",
+        "build-commands": [
+            "cd ext/wxWidgets && cp -p /usr/share/automake-*/config.{sub,guess} . &&  autoconf -f -B build/autoconf_prepend-include && ./configure --disable-sdltest --disable-webkit --disable-webview --disable-webviewwebkit --disable-ribbon --disable-propgrid --disable-xru --disable-richtext --with-gtk=3 && make",
+            "python3 build.py sip --nodoc build_py --build_dir=ext/wxWidgets",
+            "python3 build.py install_py"
+        ],
+
+        "build-options": {
+            "env": {
+                "WAF": "${PWD}/waf-2.0.14",
+                "SIP": "${FLATPAK_DEST}/bin/sip"
+            }
+        },
+        "sources": [
+            {
+                "type": "archive",
+                "url": "https://files.pythonhosted.org/packages/17/74/7c3ced03c3c76b9f98e4a0edae1801755a7599ebf481c04d9f77dfff17e3/wxPython-4.0.4.tar.gz",
+                "sha256": "0d9ef4260cb2f3e23ed9dcf6baa905ba585ac7d631613cddc299c4c83463ae29"
+            },
+            {
+                "type": "file",
+                "url": "https://waf.io/waf-2.0.14",
+                "sha256": "c5bc6083bba5e24415bb83872fa9e048afa150109a7e8855af679076d0779b22"
+            }
+        ]
+    },
     {
         "name": "runner",
         "buildsystem": "simple",
