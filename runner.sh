@@ -1,3 +1,4 @@
 #!/bin/sh
-
-python3 /app/bin/hello.py
+pushd /app/invesalius/
+python3 app.py
+popd

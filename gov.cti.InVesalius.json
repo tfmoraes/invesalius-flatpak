@@ -8,6 +8,14 @@
     "build-options": {
         "append-path": "/usr/lib/sdk/gfortran-62/bin"
     },
+    "finish-args": [
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=pulseaudio",
+        "--share=network",
+        "--filesystem=home",
+        "--filesystem=/tmp"
+    ],
     "modules": [{
         "name": "vtk",
         "sources": [
@@ -138,13 +146,57 @@
         "name": "runner",
         "buildsystem": "simple",
         "build-commands": [
-            "install -D runner.sh /app/bin/runner.sh",
-            "install -D hello.py /app/bin/hello.py"
+            "python3 setup.py build_ext --inplace",
+            "mkdir -p ${FLATPAK_DEST}/invesalius",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/icons",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/locale/{ca,cs,de,el,en,es,fa,fr,it,ja,ko,ms,nl,pt,pt_BR,ro,ru,sr,tr_TR,ur_PK,zh_CN,zh_TW}/LC_MESSAGES/",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/presets/raycasting/color_list",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/docs",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/invesalius/gui/widgets",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/invesalius/data",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/invesalius/net",
+            "mkdir -p ${FLATPAK_DEST}/invesalius/invesalius/reader",
+            "install -D icons/* 	${FLATPAK_DEST}/invesalius/icons",
+            "install locale/ca/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ca/LC_MESSAGES",
+            "install locale/cs/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/cs/LC_MESSAGES",
+            "install locale/de/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/de/LC_MESSAGES",
+            "install locale/el/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/el/LC_MESSAGES",
+            "install locale/en/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/en/LC_MESSAGES",
+            "install locale/es/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/es/LC_MESSAGES",
+            "install locale/fa/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/fa/LC_MESSAGES",
+            "install locale/fr/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/fr/LC_MESSAGES",
+            "install locale/it/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/it/LC_MESSAGES",
+            "install locale/ja/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ja/LC_MESSAGES",
+            "install locale/ko/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ko/LC_MESSAGES",
+            "install locale/ms/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ms/LC_MESSAGES",
+            "install locale/nl/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/nl/LC_MESSAGES",
+            "install locale/pt/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/pt/LC_MESSAGES",
+            "install locale/pt_BR/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/pt_BR/LC_MESSAGES",
+            "install locale/ro/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ro/LC_MESSAGES",
+            "install locale/ru/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ru/LC_MESSAGES",
+            "install locale/sr/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/sr/LC_MESSAGES",
+            "install locale/tr_TR/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/tr_TR/LC_MESSAGES",
+            "install locale/ur_PK/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ur_PK/LC_MESSAGES",
+            "install locale/zh_CN/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/zh_CN/LC_MESSAGES",
+            "install locale/zh_TW/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/zh_TW/LC_MESSAGES",
+            "install -D presets/raycasting/*.plist ${FLATPAK_DEST}/invesalius/presets/raycasting",
+            "install -D presets/raycasting/color_list/*.plist ${FLATPAK_DEST}/invesalius/presets/raycasting/color_list",
+            "install -D docs/*.pdf ${FLATPAK_DEST}/invesalius/docs",
+            "install -D *.py* ${FLATPAK_DEST}/invesalius/",
+            "install -D invesalius/*.py* ${FLATPAK_DEST}/invesalius/invesalius",
+            "install -D invesalius/reader/*.py* ${FLATPAK_DEST}/invesalius/invesalius/reader/",
+            "install -D invesalius/net/*.py* ${FLATPAK_DEST}/invesalius/invesalius/net/",
+            "install -D invesalius/gui/*.py* ${FLATPAK_DEST}/invesalius/invesalius/gui/",
+            "install -D invesalius/gui/widgets/*.py* ${FLATPAK_DEST}/invesalius/invesalius/gui/widgets/",
+            "install -D invesalius/data/*.py* ${FLATPAK_DEST}/invesalius/invesalius/data/",
+            "install -D invesalius/data/*.so* ${FLATPAK_DEST}/invesalius/invesalius/data/",
+            "install -D runner.sh /app/bin/runner.sh"
         ],
         "sources": [
             {
-                "type": "file",
-                "path": "hello.py"
+                "type": "archive",
+                "url": "https://github.com/invesalius/invesalius3/archive/v3.1.99992.tar.gz",
+                "sha256": "d72e7f5957504ace5688edc0f083a11889c9d4a0937db75669379853501c32de"
             },
             {
                 "type": "file",
