@@ -15,6 +15,8 @@ flatpak install flathub org.freedesktop.Sdk.Extension.gfortran-62
 ## Build
 
 ```bash
+git clone https://github.com/tfmoraes/invesalius-flatpak.git
+git submodule update --init
 flatpak-builder build-dir gov.cti.InVesalius.json --force-clean --ccache --require-changes
 ```
 
