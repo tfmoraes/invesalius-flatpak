@@ -183,6 +183,24 @@
                 "path": "runner.sh"
             }
         ]
+    },
+    {
+        "name":"metadata",
+        "buildsystem":"simple",
+        "build-commands":[
+            "install -Dm644 gov.cti.InVesalius.desktop /app/share/applications/gov.cti.InVesalius.desktop",
+            "install -Dm644 invesalius.png /app/share/icons/hicolor/32x32/apps/gov.cti.InVesalius.png"
+        ],
+        "sources":[
+            {
+                "type":"file",
+                "path":"gov.cti.InVesalius.desktop"
+            },
+            {
+                "type":"file",
+                "path":"invesalius.png"
+            }
+        ]
     }
     ]
 }
