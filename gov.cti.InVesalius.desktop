@@ -2,7 +2,7 @@
 Type=Application
 Name=InVesalius
 GenericName=InVesalius
-Exec=invesalius3
+Exec=runner.sh
 Terminal=false
 Icon=invesalius
 Categories=Education;Graphics;Science;DataVisualization;MedicalSoftware;Viewer;
