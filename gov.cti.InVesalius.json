@@ -1,10 +1,13 @@
 {
     "app-id": "gov.cti.InVesalius",
-    "runtime": "org.freedesktop.Platform",
-    "runtime-version": "1.6",
-    "sdk": "org.freedesktop.Sdk",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.28",
+    "sdk": "org.gnome.Sdk",
     "sdk-extensions": ["org.freedesktop.Sdk.Extension.gfortran-62"],
     "command": "runner.sh",
+    "build-options": {
+        "append-path": "/usr/lib/sdk/gfortran-62/bin"
+    },
     "modules": [{
         "name": "vtk",
         "sources": [
@@ -128,30 +131,6 @@
         "cleanup" : [
             "/bin",
             "/include"
-        ]
-    },
-    {
-        "name": "webkitgtk",
-        "buildsystem": "cmake",
-        "config-opts": [
-            "-DPORT=GTK",
-            "-DPYTHON_EXECUTABLE=/usr/bin/python3",
-            "-DENABLE_PLUGIN_PROCESS_GTK2=OFF",
-            "-DENABLE_BUBBLEWRAP_SANDBOX=OFF",
-            "-DUSE_LIBSECRET=OFF",
-            "-DENABLE_SPELLCHECK=OFF",
-            "-DUSE_LIBNOTIFY=OFF",
-            "-DUSE_OPENJPEG=OFF",
-            "-DUSE_WOFF2=OFF",
-            "-DENABLE_MEDIA_SOURCE=OFF"
-        ],
-        "cleanup": [ "/share/doc", "/bin" ],
-        "sources": [
-            {
-                "type": "archive",
-                "url": "https://webkitgtk.org/releases/webkitgtk-2.23.90.tar.xz",
-                "sha256": "841bd9ac7b3b5765d6d618b9e87bc75efa6fe4b987b85abaa1da28a31d8c06c8"
-            }
         ]
     },
     "python3-wxpython.json",

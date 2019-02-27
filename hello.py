@@ -5,6 +5,9 @@ print("version", sys.version)
 import vtk
 import gdcm
 import vtkgdcm
+import wx
+import numpy
+import scipy
 
 
 def main():
