@@ -1,5 +1,5 @@
 {
-    "app-id": "gov.cti.InVesalius",
+    "app-id": "br.gov.cti.invesalius",
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.28",
     "sdk": "org.gnome.Sdk",
@@ -116,7 +116,7 @@
     "python3-setuptools_scm.json",
     "python3-python-dateutil.json",
     "python3-matplotlib.json",
-    "python3-scikit-image==0.13.1.json",
+    "python3-scikit-image.json",
     "python3-bz2file.json",
     "python3-nibabel.json",
     "python3-pyserial.json",
@@ -190,14 +190,14 @@
         "name":"metadata",
         "buildsystem":"simple",
         "build-commands":[
-            "install -Dm644 gov.cti.InVesalius.desktop /app/share/applications/gov.cti.InVesalius.desktop",
-            "install -Dm644 invesalius.png /app/share/icons/hicolor/32x32/apps/gov.cti.InVesalius.png",
-            "install -Dm644 appdata.xml /app/share/appdata/invesalius.appdata.xml"
+            "install -Dm644 invesalius.desktop /app/share/applications/br.gov.cti.invesalius.desktop",
+            "install -Dm644 invesalius.png /app/share/icons/hicolor/256x256/apps/br.gov.cti.invesalius.png",
+            "install -Dm644 invesalius.appdata.xml /app/share/appdata/br.gov.cti.invesalius.appdata.xml"
         ],
         "sources":[
             {
                 "type":"file",
-                "path":"gov.cti.InVesalius.desktop"
+                "path":"invesalius.desktop"
             },
             {
                 "type":"file",
@@ -205,7 +205,7 @@
             },
             {
                 "type":"file",
-                "path":"appdata.xml"
+                "path":"invesalius.appdata.xml"
             }
         ]
     }

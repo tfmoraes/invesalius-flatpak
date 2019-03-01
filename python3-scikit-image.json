@@ -7,23 +7,8 @@
     "sources": [
         {
             "type": "file",
-            "url": "https://files.pythonhosted.org/packages/14/d0/a73c15bbeda3d2e7b381a36afb0d9cd770a9f4adc5d1532691013ba881db/toolz-0.9.0.tar.gz",
-            "sha256": "929f0a7ea7f61c178bd951bdae93920515d3fbdbafc8e6caf82d752b9b3b31c9"
-        },
-        {
-            "type": "file",
-            "url": "https://files.pythonhosted.org/packages/d5/28/cb70b1c9f07e783b42145c787049b3a731eb0dece5e179aeef5e646b2706/dask-1.1.2.tar.gz",
-            "sha256": "93b355b9a9c9a3ddbb39fab99d5759aad5cfd346f4520b87788970e80cf97256"
-        },
-        {
-            "type": "file",
-            "url": "https://files.pythonhosted.org/packages/3c/7e/443be24431324bd34d22dd9d11cc845d995bcd3b500676bcf23142756975/Pillow-5.4.1.tar.gz",
-            "sha256": "5233664eadfa342c639b9b9977190d64ad7aca4edc51a966394d7e08e7f38a9f"
-        },
-        {
-            "type": "file",
-            "url": "https://files.pythonhosted.org/packages/fc/20/d3e736493b16e9455ce8579722d644b313814c599d5824d34e448845f746/scikit-image-0.14.0.tar.gz",
-            "sha256": "325f75eb80fbc5371136e37f323445309ca9f65b6c6f718d0d0e2189e5de1224"
+            "url": "https://files.pythonhosted.org/packages/83/2a/c5a39c12c196c19a443fa4d17c0768a24231e46ae952930a9d66bad45557/scikit-image-0.13.1.tar.gz",
+            "sha256": "353879ddf7483f4621872c49cd9bc8a0ad1c3154ac0670b70799922f4cb899e8"
         },
         {
             "type": "file",
@@ -39,16 +24,6 @@
             "type": "file",
             "url": "https://files.pythonhosted.org/packages/c4/26/b48aaa231644bc875bb348e162d156edb18b994da900a10f4493ea995a2f/decorator-4.3.2.tar.gz",
             "sha256": "33cd704aea07b4c28b3eb2c97d288a06918275dac0ecebdaf1bc8a48d98adb9e"
-        },
-        {
-            "type": "file",
-            "url": "https://files.pythonhosted.org/packages/dd/bf/4138e7bfb757de47d1f4b6994648ec67a51efe58fa907c1e11e350cddfca/six-1.12.0.tar.gz",
-            "sha256": "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"
-        },
-        {
-            "type": "file",
-            "url": "https://files.pythonhosted.org/packages/57/71/4bc4d2731651a61c55c4c20681c742a9fee05f9efc2bd7ae52bf226ebfc2/cloudpickle-0.8.0.tar.gz",
-            "sha256": "18d3a5dfc82f752b9f4c844cceb663213e26e130f4a2894a18ad1f11d57a30bc"
         }
     ]
 }
