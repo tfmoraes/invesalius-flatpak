@@ -5,6 +5,20 @@
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": ["org.freedesktop.Sdk.Extension.gfortran-62"],
     "command": "runner.sh",
+    "cleanup": [
+        "/include",
+        "/lib/cmake",
+        "/share/cmake",
+        "/share/doc",
+        "/share/swig",
+        "/bin/cy*",
+        "/bin/nib*",
+        "/bin/py*",
+        "/bin/skivi",
+        "/bin/swig",
+        "/bin/vtk*",
+        "/bin/wx*"
+    ],
     "build-options": {
         "append-path": "/usr/lib/sdk/gfortran-62/bin"
     },
@@ -137,7 +151,7 @@
             "mkdir -p ${FLATPAK_DEST}/invesalius/invesalius/data",
             "mkdir -p ${FLATPAK_DEST}/invesalius/invesalius/net",
             "mkdir -p ${FLATPAK_DEST}/invesalius/invesalius/reader",
-            "install -D icons/* 	${FLATPAK_DEST}/invesalius/icons",
+            "install -D icons/* ${FLATPAK_DEST}/invesalius/icons",
             "install locale/ca/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/ca/LC_MESSAGES",
             "install locale/cs/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/cs/LC_MESSAGES",
             "install locale/de/LC_MESSAGES/* ${FLATPAK_DEST}/invesalius/locale/de/LC_MESSAGES",
