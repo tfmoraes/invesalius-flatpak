@@ -17,7 +17,12 @@
         "/bin/skivi",
         "/bin/swig",
         "/bin/vtk*",
-        "/bin/wx*"
+        "/bin/wx*",
+        "/bin/*.py",
+        "/bin/f2py3",
+        "/bin/helpviewer",
+        "/bin/img*",
+        "/bin/parrec2nii"
     ],
     "build-options": {
         "append-path": "/usr/lib/sdk/gfortran-62/bin"
