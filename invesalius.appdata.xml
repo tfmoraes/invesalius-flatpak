@@ -29,7 +29,7 @@
             <li>Minimum, Maximum or Mean Intensity Projection, Maximum Intensity Difference Accumulation and Contour based visualizations</li>
         </ul>
     </description>
-    <launchable type="desktop-id">invesalius.desktop</launchable>
+    <launchable type="desktop-id">br.gov.cti.invesalius.desktop</launchable>
     <screenshots>
         <screenshot>
             <image>https://invesalius.github.io/images/screenshot/screen1.png</image>
@@ -38,4 +38,13 @@
             <image>https://invesalius.github.io/images/screenshot/screen2.png</image>
         </screenshot>
     </screenshots>
+
+    <releases>
+        <release version="3.1.99992" type="development" date="2018-09-10" urgency="high">
+            <description>
+                <p>Ported to Python3</p>
+                <p>Ported to WXPython4</p>
+            </description>
+        </release>
+    </releases>
 </component>
