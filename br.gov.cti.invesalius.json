@@ -13,10 +13,8 @@
         "--socket=x11",
         "--socket=wayland",
         "--device=dri",
-        "--socket=pulseaudio",
         "--share=network",
-        "--filesystem=home",
-        "--filesystem=/tmp"
+        "--filesystem=home"
     ],
     "modules": [{
         "name": "vtk",
