@@ -5,25 +5,6 @@
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": ["org.freedesktop.Sdk.Extension.gfortran-62"],
     "command": "runner.sh",
-    "cleanup": [
-        "/include",
-        "/lib/cmake",
-        "/share/cmake",
-        "/share/doc",
-        "/share/swig",
-        "/bin/cy*",
-        "/bin/nib*",
-        "/bin/py*",
-        "/bin/skivi",
-        "/bin/swig",
-        "/bin/vtk*",
-        "/bin/wx*",
-        "/bin/*.py",
-        "/bin/f2py3",
-        "/bin/helpviewer",
-        "/bin/img*",
-        "/bin/parrec2nii"
-    ],
     "build-options": {
         "append-path": "/usr/lib/sdk/gfortran-62/bin"
     },
@@ -46,7 +27,7 @@
                 "sha256": "2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a"
             }
         ],
-        "buildsystem": "cmake",
+        "buildsystem": "cmake-ninja",
         "config-opts": [
             "-DBUILD_DOCUMENTATION=OFF",
             "-DBUILD_EXAMPLES=OFF",
@@ -57,6 +38,13 @@
             "-DVTK_WRAP_TCL=OFF",
             "-DCMAKE_BUILD_TYPE=Release",
             "-DPYTHON_EXECUTABLE=/usr/bin/python3"
+        ],
+        "cleanup": [
+            "/bin",
+            "/lib/cmake",
+            "/include",
+            "/share/cmake",
+            "/share/doc"
         ]
     },
     {
@@ -76,6 +64,9 @@
             "--without-scilab",
             "--without-java",
             "--without-ruby"
+        ],
+        "cleanup": [
+            "*"
         ]
     },
     {
@@ -83,10 +74,10 @@
         "builddir": true,
         "sources": [{
             "type": "archive",
-            "url": "https://netix.dl.sourceforge.net/project/gdcm/gdcm%202.x/GDCM%202.8.8/gdcm-2.8.8.tar.gz",
+            "url": "https://downloads.sourceforge.net/project/gdcm/gdcm%202.x/GDCM%202.8.8/gdcm-2.8.8.tar.gz",
             "sha256": "073405d0f3532b8b5d813b6d3d48318b297d6141d2a2d18280f1b86051ac745e"
         }],
-        "buildsystem": "cmake",
+        "buildsystem": "cmake-ninja",
         "config-opts": [
             "-DGDCM_BUILD_APPLICATIONS=OFF",
             "-DGDCM_BUILD_SHARED_LIBS=ON",
@@ -96,6 +87,14 @@
             "-DGDCM_INSTALL_PYTHONMODULE_DIR=/app/lib/python3.5/site-packages/",
             "-DGDCM_USE_VTK=ON",
             "-DGDCM_BUILD_DOCBOOK_MANPAGES:BOOL=OFF"
+        ],
+        "cleanup": [
+            "/bin",
+            "/lib/cmake",
+            "/lib/pkgconfig",
+            "/include",
+            "/share/cmake",
+            "/share/doc"
         ]
     },
 
@@ -123,7 +122,11 @@
                 "sha512": "17786cb7306fccdc9b4a242de7f64fc261ebe6a10b6ec55f519deb4cb673cb137e8742aa5698fd2dc52f1cd56d3bd116af3f593a01dcf6770c4dcc86c50b2a7f"
             }
         ],
-        "cleanup": [ "/lib/cmake" ]
+        "cleanup": [
+            "/include",
+            "/lib/cmake",
+            "/lib/pkgconfig"
+        ]
     },
     "shared-modules/glu/glu-9.0.0.json",
     "python3-Pillow.json",
