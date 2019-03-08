@@ -14,7 +14,9 @@
         "--socket=wayland",
         "--device=dri",
         "--share=network",
-        "--filesystem=home"
+        "--filesystem=home",
+        /* For optical drive access and usb drivers*/
+        "--device=all"
     ],
     "modules": [{
         "name": "vtk",
@@ -143,34 +145,44 @@
     "python3-psutil.json",
     "python3-configparser.json",
     {
-        "name": "runner",
+        "name": "invesalius",
         "buildsystem": "simple",
         "build-commands": [
             "python3 setup.py build_ext --inplace",
+            "rm -rf build",
+            "rm -rf contrib",
+            "rm -rf po",
+            "rm -rf Dockerfile",
+            "rm -rf docs/devel",
+            "rm -rf docs/user_guide_en_source",
+            "rm -rf docs/user_guide_figures",
+            "rm -rf docs/user_guide_pt_BR_source",
             "mkdir -p ${FLATPAK_DEST}/invesalius",
-            "cp -r * ${FLATPAK_DEST}/invesalius/",
-            "rm -rf /app/invesalius/build",
-            "rm -rf /app/invesalius/contrib",
-            "rm -rf /app/invesalius/po",
-            "rm -rf /app/invesalius/Dockerfile",
-            "rm -rf /app/invesalius/docs/devel",
-            "rm -rf /app/invesalius/docs/user_guide_en_source",
-            "rm -rf /app/invesalius/docs/user_guide_figures",
-            "rm -rf /app/invesalius/docs/user_guide_pt_BR_source",
-            "find /app/invesalius/ -name *.pyx -delete",
-            "find /app/invesalius/ -name *.pxd -delete",
-            "find /app/invesalius/ -name *.cpp -delete",
-            "find /app/invesalius/ -name *.c -delete",
-            "find /app/invesalius/ -name *.*ignore -delete",
-            "find /app/invesalius/ -name *.git -delete",
-            "install -D runner.sh /app/bin/runner.sh"
+            "cp -r * ${FLATPAK_DEST}/invesalius/"
+        ],
+        "cleanup": [
+            "*.pyx",
+            "*.pxd",
+            "*.cpp",
+            "*.c",
+            "*.*ignore",
+            "*.git"
         ],
         "sources": [
             {
                 "type": "archive",
                 "url": "https://github.com/invesalius/invesalius3/archive/v3.1.99992.tar.gz",
                 "sha256": "d72e7f5957504ace5688edc0f083a11889c9d4a0937db75669379853501c32de"
-            },
+            }
+        ]
+    },
+    {
+        "name": "runner",
+        "buildsystem": "simple",
+        "build-commands": [
+            "install -D runner.sh /app/bin/runner.sh"
+        ],
+        "sources": [
             {
                 "type": "file",
                 "path": "runner.sh"
@@ -178,25 +190,25 @@
         ]
     },
     {
-        "name":"metadata",
-        "buildsystem":"simple",
-        "build-commands":[
-            "install -Dm644 invesalius.desktop /app/share/applications/br.gov.cti.invesalius.desktop",
-            "install -Dm644 invesalius.png /app/share/icons/hicolor/256x256/apps/br.gov.cti.invesalius.png",
-            "install -Dm644 invesalius.appdata.xml /app/share/appdata/br.gov.cti.invesalius.appdata.xml"
+        "name": "metadata",
+        "buildsystem": "simple",
+        "build-commands": [
+            "install -D -t /app/share/applications/ br.gov.cti.invesalius.desktop",
+            "install -D -t /app/share/icons/hicolor/256x256/apps/ br.gov.cti.invesalius.png",
+            "install -D -t /app/share/appdata/ br.gov.cti.invesalius.appdata.xml"
         ],
-        "sources":[
+        "sources": [
             {
-                "type":"file",
-                "path":"invesalius.desktop"
+                "type": "file",
+                "path": "br.gov.cti.invesalius.desktop"
             },
             {
-                "type":"file",
-                "path":"invesalius.png"
+                "type": "file",
+                "path": "br.gov.cti.invesalius.png"
             },
             {
-                "type":"file",
-                "path":"invesalius.appdata.xml"
+                "type": "file",
+                "path": "br.gov.cti.invesalius.appdata.xml"
             }
         ]
     }
