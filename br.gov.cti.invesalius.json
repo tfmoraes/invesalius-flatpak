@@ -14,203 +14,199 @@
         /* For optical drive access and usb drivers*/
         "--device=all"
     ],
-    "modules": [{
-        "name": "vtk",
-        "sources": [
-            {
+    "modules": [
+        {
+            "name": "lapack",
+            "buildsystem": "cmake",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DBUILD_SHARED_LIBS=ON",
+                "-DBUILD_TESTING=OFF",
+                "-DCMAKE_Fortran_COMPILER=/bin/gfortran",
+                "-DLAPACKE=ON",
+                "-DCBLAS=ON"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://www.netlib.org/lapack/lapack-3.8.0.tar.gz",
+                    "sha512": "17786cb7306fccdc9b4a242de7f64fc261ebe6a10b6ec55f519deb4cb673cb137e8742aa5698fd2dc52f1cd56d3bd116af3f593a01dcf6770c4dcc86c50b2a7f"
+                }
+            ],
+            "cleanup": [
+                "/include",
+                "/lib/cmake",
+                "/lib/pkgconfig"
+            ]
+        },
+        {
+            "name": "swig",
+            "sources":[{
                 "type": "archive",
-                "url": "https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz",
-                "sha256": "34c3dc775261be5e45a8049155f7228b6bd668106c72a3c435d95730d17d57bb"
-            }
-        ],
-        "buildsystem": "cmake-ninja",
-        "builddir": true,
-        "config-opts": [
-            "-DBUILD_DOCUMENTATION=OFF",
-            "-DBUILD_EXAMPLES=OFF",
-            "-DBUILD_SHARED_LIBS=ON",
-            "-DVTK_USE_TK=OFF",
-            "-DVTK_WRAP_JAVA=OFF",
-            "-DVTK_WRAP_PYTHON=ON",
-            "-DVTK_WRAP_TCL=OFF",
-            "-DCMAKE_BUILD_TYPE=Release",
-            "-DPYTHON_EXECUTABLE=/usr/bin/python3"
-        ],
-        "cleanup": [
-            "/bin",
-            "/lib/cmake",
-            "/include",
-            "/share/cmake",
-            "/share/doc"
-        ]
-    },
-    {
-        "name": "swig",
-        "sources":[{
-            "type": "archive",
-            "url": "http://prdownloads.sourceforge.net/swig/swig-3.0.12.tar.gz",
-            "sha256": "7cf9f447ae7ed1c51722efc45e7f14418d15d7a1e143ac9f09a668999f4fc94d"
-        }],
-        "config-opts": [
-            "--without-pcre",
-            "--disable-ccache",
-            "--without-tcl",
-            "--without-tcl",
-            "--without-perl5",
-            "--without-octave",
-            "--without-scilab",
-            "--without-java",
-            "--without-ruby"
-        ],
-        "cleanup": [
-            "*"
-        ]
-    },
-    {
-        "name": "gdcm",
-        "builddir": true,
-        "sources": [
-            {
-            "type": "git",
-            "url": "https://github.com/malaterre/GDCM.git",
-            "commit": "69cf8130b042be15ffbf7427cc5aa05a13723aa1"
-            }
-        ],
-        "buildsystem": "cmake-ninja",
-        "config-opts": [
-            "-DGDCM_BUILD_APPLICATIONS=OFF",
-            "-DGDCM_BUILD_SHARED_LIBS=ON",
-            "-DCMAKE_BUILD_TYPE=Release",
-            "-DGDCM_WRAP_PYTHON=ON",
-            "-DPYTHON_EXECUTABLE=/usr/bin/python3",
-            "-DGDCM_INSTALL_PYTHONMODULE_DIR=/app/lib/python3.7/site-packages/",
-            "-DGDCM_USE_VTK=ON",
-            "-DGDCM_BUILD_DOCBOOK_MANPAGES:BOOL=OFF"
-        ],
-        "cleanup": [
-            "/bin",
-            "/include",
-            "/lib/gdcm-2.8",
-            "/lib/gdcmopenjpeg-2.1",
-            "/lib/cmake",
-            "/lib/pkgconfig",
-            "/share/cmake",
-            "/share/doc"
-        ]
-    },
-    {
-        "name": "gfortran",
-        "buildsystem": "simple",
-        "build-commands": [ "/usr/lib/sdk/gfortran-62/install.sh" ]
-    },
-    {
-        "name": "lapack",
-        "buildsystem": "cmake",
-        "builddir": true,
-        "config-opts": [
-            "-DCMAKE_BUILD_TYPE=Release",
-            "-DBUILD_SHARED_LIBS=ON",
-            "-DBUILD_TESTING=OFF",
-            "-DCMAKE_Fortran_COMPILER=/usr/lib/sdk/gfortran-62/bin/gfortran",
-            "-DLAPACKE=ON",
-            "-DCBLAS=ON"
-        ],
-        "sources": [
-            {
-                "type": "archive",
-                "url": "http://www.netlib.org/lapack/lapack-3.8.0.tar.gz",
-                "sha512": "17786cb7306fccdc9b4a242de7f64fc261ebe6a10b6ec55f519deb4cb673cb137e8742aa5698fd2dc52f1cd56d3bd116af3f593a01dcf6770c4dcc86c50b2a7f"
-            }
-        ],
-        "cleanup": [
-            "/include",
-            "/lib/cmake",
-            "/lib/pkgconfig"
-        ]
-    },
-    "shared-modules/glu/glu-9.0.0.json",
-    "python3-Pillow.json",
-    "python3-wxpython.json",
-    "python3-numpy.json",
-    "python3-scipy.json",
-    "python3-cython.json",
-    "python3-setuptools.json",
-    "python3-setuptools_scm.json",
-    "python3-python-dateutil.json",
-    "python3-matplotlib.json",
-    "python3-scikit-image.json",
-    "python3-bz2file.json",
-    "python3-nibabel.json",
-    "python3-pyserial.json",
-    "python3-psutil.json",
-    "python3-configparser.json",
-    {
-        "name": "invesalius",
-        "buildsystem": "simple",
-        "build-commands": [
-            "python3 setup.py build_ext --inplace",
-            "mkdir -p ${FLATPAK_DEST}/invesalius",
-            "cp -r * ${FLATPAK_DEST}/invesalius/"
-        ],
-        "cleanup": [
-            "/invesalius/build",
-            "/invesalius/contrib",
-            "/invesalius/po",
-            "/invesalius/Dockerfile",
-            "/invesalius/docs/devel",
-            "/invesalius/docs/user_guide_en_source",
-            "/invesalius/docs/user_guide_figures",
-            "/invesalius/docs/user_guide_pt_BR_source",
-            "*.pyx",
-            "*.pxd",
-            "*.cpp",
-            "*.c",
-            "*.*ignore",
-            "*.git"
-        ],
-        "sources": [
-            {
-                "type": "archive",
-                "url": "https://github.com/invesalius/invesalius3/archive/v3.1.99992.tar.gz",
-                "sha256": "d72e7f5957504ace5688edc0f083a11889c9d4a0937db75669379853501c32de"
-            }
-        ]
-    },
-    {
-        "name": "runner",
-        "buildsystem": "simple",
-        "build-commands": [
-            "install -D runner.sh /app/bin/runner.sh"
-        ],
-        "sources": [
-            {
-                "type": "file",
-                "path": "runner.sh"
-            }
-        ]
-    },
-    {
-        "name": "metadata",
-        "buildsystem": "simple",
-        "build-commands": [
-            "install -D -t /app/share/applications/ br.gov.cti.invesalius.desktop",
-            "install -D -t /app/share/icons/hicolor/256x256/apps/ br.gov.cti.invesalius.png",
-            "install -D -t /app/share/appdata/ br.gov.cti.invesalius.appdata.xml"
-        ],
-        "sources": [
-            {
-                "type": "file",
-                "path": "br.gov.cti.invesalius.desktop"
-            },
-            {
-                "type": "file",
-                "path": "br.gov.cti.invesalius.png"
-            },
-            {
-                "type": "file",
-                "path": "br.gov.cti.invesalius.appdata.xml"
-            }
-        ]
-    }
+                "url": "http://prdownloads.sourceforge.net/swig/swig-3.0.12.tar.gz",
+                "sha256": "7cf9f447ae7ed1c51722efc45e7f14418d15d7a1e143ac9f09a668999f4fc94d"
+            }],
+            "config-opts": [
+                "--without-pcre",
+                "--disable-ccache",
+                "--without-tcl",
+                "--without-tcl",
+                "--without-perl5",
+                "--without-octave",
+                "--without-scilab",
+                "--without-java",
+                "--without-ruby"
+            ],
+            "cleanup": [
+                "*"
+            ]
+        },
+        "shared-modules/glu/glu-9.0.0.json",
+        "python3-Pillow.json",
+        "python3-wxpython.json",
+        "python3-numpy.json",
+        "python3-scipy.json",
+        {
+            "name": "vtk",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz",
+                    "sha256": "34c3dc775261be5e45a8049155f7228b6bd668106c72a3c435d95730d17d57bb"
+                }
+            ],
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DBUILD_DOCUMENTATION=OFF",
+                "-DBUILD_EXAMPLES=OFF",
+                "-DBUILD_SHARED_LIBS=ON",
+                "-DVTK_USE_TK=OFF",
+                "-DVTK_WRAP_JAVA=OFF",
+                "-DVTK_WRAP_PYTHON=ON",
+                "-DVTK_WRAP_TCL=OFF",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DPYTHON_EXECUTABLE=/usr/bin/python3"
+            ],
+            "cleanup": [
+                "/bin",
+                "/lib/cmake",
+                "/include",
+                "/share/cmake",
+                "/share/doc"
+            ]
+        },
+        {
+            "name": "gdcm",
+            "builddir": true,
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/malaterre/GDCM.git",
+                    "commit": "69cf8130b042be15ffbf7427cc5aa05a13723aa1"
+                }
+            ],
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DGDCM_BUILD_APPLICATIONS=OFF",
+                "-DGDCM_BUILD_SHARED_LIBS=ON",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DGDCM_WRAP_PYTHON=ON",
+                "-DPYTHON_EXECUTABLE=/usr/bin/python3",
+                "-DGDCM_INSTALL_PYTHONMODULE_DIR=/app/lib/python3.7/site-packages/",
+                "-DGDCM_USE_VTK=ON",
+                "-DGDCM_BUILD_DOCBOOK_MANPAGES:BOOL=OFF"
+            ],
+            "cleanup": [
+                "/bin",
+                "/include",
+                "/lib/gdcm-2.8",
+                "/lib/gdcmopenjpeg-2.1",
+                "/lib/cmake",
+                "/lib/pkgconfig",
+                "/share/cmake",
+                "/share/doc"
+            ]
+        },
+        "python3-cython.json",
+        "python3-setuptools.json",
+        "python3-setuptools_scm.json",
+        "python3-python-dateutil.json",
+        "python3-matplotlib.json",
+        "python3-scikit-image.json",
+        "python3-bz2file.json",
+        "python3-nibabel.json",
+        "python3-pyserial.json",
+        "python3-psutil.json",
+        "python3-configparser.json",
+        {
+            "name": "invesalius",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python3 setup.py build_ext --inplace",
+                "mkdir -p ${FLATPAK_DEST}/invesalius",
+                "cp -r * ${FLATPAK_DEST}/invesalius/"
+            ],
+            "cleanup": [
+                "/invesalius/build",
+                "/invesalius/contrib",
+                "/invesalius/po",
+                "/invesalius/Dockerfile",
+                "/invesalius/docs/devel",
+                "/invesalius/docs/user_guide_en_source",
+                "/invesalius/docs/user_guide_figures",
+                "/invesalius/docs/user_guide_pt_BR_source",
+                "*.pyx",
+                "*.pxd",
+                "*.cpp",
+                "*.c",
+                "*.*ignore",
+                "*.git"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/invesalius/invesalius3/archive/v3.1.99992.tar.gz",
+                    "sha256": "d72e7f5957504ace5688edc0f083a11889c9d4a0937db75669379853501c32de"
+                }
+            ]
+        },
+        {
+            "name": "runner",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -D runner.sh /app/bin/runner.sh"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "runner.sh"
+                }
+            ]
+        },
+        {
+            "name": "metadata",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -D -t /app/share/applications/ br.gov.cti.invesalius.desktop",
+                "install -D -t /app/share/icons/hicolor/256x256/apps/ br.gov.cti.invesalius.png",
+                "install -D -t /app/share/appdata/ br.gov.cti.invesalius.appdata.xml"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "br.gov.cti.invesalius.desktop"
+                },
+                {
+                    "type": "file",
+                    "path": "br.gov.cti.invesalius.png"
+                },
+                {
+                    "type": "file",
+                    "path": "br.gov.cti.invesalius.appdata.xml"
+                }
+            ]
+        }
     ]
 }
